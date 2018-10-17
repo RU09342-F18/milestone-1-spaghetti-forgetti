@@ -4,6 +4,9 @@
 /**
  * main.c
  */
+
+extern void LEDSetup();
+extern void timerSetup();
 void main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
@@ -32,15 +35,15 @@ void main(void)
 void LEDSetup(void)
 {
     P1DIR |= (BIT2 + BIT3 + BIT4);  //Set outputs for LEDs
-    P1SEL |= (BIT2 + BIT3 + BIT4);  //
+    P1SEL |= (BIT2 + BIT3 + BIT4);  //GPIO
 }
 void timerSetup(void)
 {
     TA0CTL = TASSEL_2 + ID_2 + MC_1;        //SMCLK + Internal Divider of 4 + upmode
     TA0CCR0 = 255;      //Full Cycle
-    TA0CCR1 = 150;        //Red LED
-    TA0CCR2 = 0;        //Green LED
-    TA0CCR3 = 0;        //Blue LED
+    //TA0CCR1 = 255;        //Red LED
+    //TA0CCR2 = 255;        //Green LED
+    //TA0CCR3 = 0;        //Blue LED
     TA0CCTL1 = OUTMOD_7;  //reset/set
     TA0CCTL2 = OUTMOD_7;  //reset/set
     TA0CCTL3 = OUTMOD_7;  //reset/set
